@@ -1,15 +1,20 @@
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class TicTacToe {
-    public static void main(String[] args) {
-        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        System.out.println("Hello there, enter the size of the board");
+        TicTacToe.enterTheSizeOfTheBoard();
+
         int size = 3;
         char[][] board1 = new char[size][size];
 
+
         char[][] board = {{'O', 'X', 'X'},
-                          {'O', 'X', ' '},
-                          {' ', 'O', 'O'}};
+                {'O', 'X', ' '},
+                {' ', 'O', 'O'}};
 
         TicTacToe.printBoard(board, size);
 
@@ -31,5 +36,22 @@ public class TicTacToe {
             }
             System.out.println();
         }
+    }
+
+    public static void enterTheSizeOfTheBoard() throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        do {
+            try {
+                int size = Integer.parseInt(reader.readLine());
+                if (size >= 3 && size <= 20) {
+                    break;
+                } else {
+                    System.out.println("Maximum board size is 20");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Enter the number from 3 to 20");
+            }
+        } while (true);
+        reader.close();
     }
 }
